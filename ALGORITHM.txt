@@ -28,29 +28,29 @@ SUDOKU SOLVER ALGORITHM - ASCII DIAGRAM
 
       ╔════════════════════════════════════════════════════════════╗
       ║  1. ELIMINATE from ROW:    q[x][*][n] = 0                  ║
-      ║                                                             ║
+      ║                                                            ║
       ║     [1][2][3][4][5][6][7][8][9]                            ║
-      ║      X  X  X  X  X  X  X  X  X    ← Clear digit n         ║
+      ║      X  X  X  X  X  X  X  X  X    ← Clear digit n          ║
       ╚════════════════════════════════════════════════════════════╝
                               │
                               ▼
       ╔════════════════════════════════════════════════════════════╗
       ║  2. ELIMINATE from COLUMN: q[*][y][n] = 0                  ║
-      ║                                                             ║
-      ║     [X]                                                     ║
-      ║     [X]                                                     ║
+      ║                                                            ║
+      ║     [X]                                                    ║
+      ║     [X]                                                    ║
       ║     [X]  ← Clear digit n                                   ║
-      ║     [X]                                                     ║
-      ║     [X]                                                     ║
+      ║     [X]                                                    ║
+      ║     [X]                                                    ║
       ╚════════════════════════════════════════════════════════════╝
                               │
                               ▼
       ╔════════════════════════════════════════════════════════════╗
       ║  3. ELIMINATE from 3x3 BOX: q[box_cells][n] = 0            ║
-      ║                                                             ║
+      ║                                                            ║
       ║     ┌─────────┐                                            ║
       ║     │ X  X  X │                                            ║
-      ║     │ X  X  X │  ← Clear digit n in box                   ║
+      ║     │ X  X  X │  ← Clear digit n in box                    ║
       ║     │ X  X  X │                                            ║
       ║     └─────────┘                                            ║
       ╚════════════════════════════════════════════════════════════╝
@@ -75,49 +75,49 @@ SUDOKU SOLVER ALGORITHM - ASCII DIAGRAM
       │                  │
       │   ┌──────────────▼──────────────┐
       │   │ RULE 1: Only digit in cell  │  If cell has only 1 possible → set()
-      │   │                              │
-      │   │   Cell possibilities:        │
+      │   │                             │
+      │   │   Cell possibilities:       │
       │   │   [.][.][3][.][.][.][.][.]  │  Only 3 is possible → set(i,j,3)
-      │   └──────────────┬───────────────┘
+      │   └──────────────┬──────────────┘
       │                  │
       │   ┌──────────────▼──────────────┐
       │   │ RULE 2: Only place in row   │  If digit has only 1 spot in row → set()
-      │   │                              │
+      │   │                             │
       │   │   Row 5: Where can '7' go?  │
       │   │   [X][X][?][X][X][X][X][X]  │  Only 1 place → set(5,3,7)
-      │   └──────────────┬───────────────┘
+      │   └──────────────┬──────────────┘
       │                  │
       │   ┌──────────────▼──────────────┐
       │   │ RULE 3: Only place in column│  If digit has only 1 spot in col → set()
-      │   │                              │
+      │   │                             │
       │   │   Col 2: Where can '4' go?  │
       │   │   [X][X][?][X][X][X][X][X]  │  Only 1 place → set(3,2,4)
-      │   └──────────────┬───────────────┘
+      │   └──────────────┬──────────────┘
       │                  │
       │   ┌──────────────▼──────────────┐
       │   │ RULE 4: Row confined to box │  If digit only in 1 row of box
-      │   │                              │  → eliminate from rest of row
-      │   │   ┌─────────┐                │
+      │   │                             │  → eliminate from rest of row
+      │   │   ┌─────────┐               │
       │   │   │ ? . . . │ . . . . . .   │  '6' only possible in box row
       │   │   │ X X X X │ X X X X X X   │  → clear '6' from rest of row
-      │   │   │ X X X X │                │
-      │   │   └─────────┘                │
-      │   └──────────────┬───────────────┘
+      │   │   │ X X X X │               │
+      │   │   └─────────┘               │
+      │   └──────────────┬──────────────┘
       │                  │
       │   ┌──────────────▼──────────────┐
       │   │ RULE 5: Col confined to box │  If digit only in 1 col of box
-      │   │                              │  → eliminate from rest of column
-      │   └──────────────┬───────────────┘
+      │   │                             │  → eliminate from rest of column
+      │   └──────────────┬──────────────┘
       │                  │
       │   ┌──────────────▼──────────────┐
       │   │ RULE 6: Only place in box   │  If digit has only 1 spot in 3x3 box
-      │   │                              │  → set()
-      │   │   ┌─────────┐                │
-      │   │   │ X X X . │                │
-      │   │   │ X X X X │  Only 1 place  │
-      │   │   │ X X X X │  for '8' → set │
-      │   │   └─────────┘                │
-      │   └──────────────┬───────────────┘
+      │   │                             │  → set()
+      │   │   ┌─────────┐               │
+      │   │   │ X X X . │               │
+      │   │   │ X X X X │ Only 1 place  │
+      │   │   │ X X X X │ for '8' → set │
+      │   │   └─────────┘               │
+      │   └──────────────┬──────────────┘
       │                  │
       └──────────────────┘
       │
